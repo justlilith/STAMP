@@ -1,0 +1,22 @@
+{
+  "name": "stamp",
+  "version": "0.0.2",
+  "description": "An audio fingerprinting and comparison library.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "zora | tap | faucet"
+  },
+  "author": "Lilith",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "faucet": "^0.0.4",
+    "tap": "^18.5.0",
+    "typescript": "^5.2.2",
+    "zora": "^5.2.0"
+  },
+  "dependencies": {
+    "audio-decode": "^2.1.5",
+    "audio-type": "^2.2.1",
+    "pitchy": "^4.0.7"
+  }
+}

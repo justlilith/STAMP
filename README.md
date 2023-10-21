@@ -19,15 +19,15 @@ Here are a few use cases for STAMP/Stamps:
 
 ## STAMP structure
 
-A Stamp is a collection of measurements regarding an input sound, packaged with the sound itself. STAMP can read, create, and compare Stamps. Each dimensional value of a Stamp is a float, with `1` existing as the utmost extreme of that dimension, and `0` as the absolute minimum (no data available). The STAMP format is described the end of this readme.
+A Stamp is a collection of measurements regarding an input sound, packaged with the sound itself. STAMP can read, create, and compare Stamps. Each dimensional value of a Stamp is a number, with `1` existing as the utmost extreme of that dimension, and `0` as the absolute minimum (no data available). The STAMP format is described the end of this readme.
 
 Due to this, two Stamps can be compared across multiple dimensions to create a unified matching value between `0` and `1`. However, because the dimensional data persists, you could also create your own matching criteria. For example:
 
 ```ts
 import { Stamp } from 'stamp'
 
-const stampCalm: Stamp = Stamp.create.from('audio0.wav', { name: stampCalm})
-const stampRushed: Stamp = Stamp.create.from('audio1.wav', { name: stampRushed})
+const stampCalm: Stamp = Stamp.create.from('audio0.wav', { name: 'stampCalm'})
+const stampRushed: Stamp = Stamp.create.from('audio1.wav', { name: 'stampRushed'})
 const matchValues: Stamp.StampComparison = Stamp.compareStamps(['pace', 'tempo'], [stampCalm, stampRushed])
 
 /*
@@ -61,7 +61,7 @@ STAMP leans heavily on the following packages:
 
 ### Development
 
-STAMP is written in [Typescript](https://typescriptlang.org/), and bundled using [Vite](https://vitejs.dev).
+STAMP is written in [Typescript](https://typescriptlang.org/).
 
 To build STAMP, use `npm run build`. By default, STAMP is built and stored in `./dist`.
 
@@ -83,49 +83,7 @@ To test, use `npm run test`. For more human-readable output, use `npm run test:h
 
 ## STAMP Format
 
-```ts
-interface Moment = {
-    endMs: number
-    startMs: number
-    value: float
-}
-
-interface SampledValue = {
-    average: {
-        value: float
-    }
-    total: {
-        value: float
-    }
-    rolling?: {
-        sampleSizeMs: number
-        value: float
-    }
-}
-
-interface FlexibleValue = {
-    average: {
-        value: float
-    }
-    moments: Moment[]
-}
-
-interface Stamp = {
-    audio: AudioBuffer
-    dimensionalValues: {
-        assonance: SampledValue
-        dissonance: SampledValue
-        emphasis: SampledValue
-        feedback: SampledValue
-        harmony: SampledValue
-        mood: SampledValue
-        passion: SampledValue
-        sibilance: SampledValue
-        sonicWidth: SampledValue
-        tempo: FlexibleValue
-    }
-}
-```
+Because a Stamp is audio alongside metadata and functions, the Stamp format is represented as a class. For type definitions, please see `./types`.
 
 ## Miscellaneous Notes
 
